@@ -9,6 +9,7 @@ function App() {
   const [token, setToken] = useState(loadFromLocal('token'));
   const [user, setUser] = useState(null);
   const [isUsernameTaken, setIsUsernameTaken] = useState(false);
+  const [currentShip, setCurrentShip] = useState({});
 
   useEffect(() => {
     saveToLocal('token', token);
@@ -30,10 +31,14 @@ function App() {
               isUsernameTaken={isUsernameTaken}
               token={token}
               getUserInfo={getUserInfo}
+              currentShip={currentShip}
             />
           }
         />
-        <Route path="/ships" element={<ShipsPage token={token} />} />
+        <Route
+          path="/ships"
+          element={<ShipsPage token={token} buyShip={buyShip} />}
+        />
         <Route path="/market" element={<MarketPage />} />
       </Routes>
     </div>
@@ -69,6 +74,27 @@ function App() {
       setUser(data.user);
     } catch (error) {
       console.error('ERROR:', error);
+    }
+  }
+
+  async function buyShip() {
+    console.log('hallo');
+    const response = await fetch(
+      `https://api.spacetraders.io/my/ships?token=${token}&location=OE-PM-TR&type=JW-MK-I`,
+      {
+        method: 'POST',
+      }
+    ).catch(error => {
+      console.log('ERROR', error.message);
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setCurrentShip(data.ship);
+      console.log(data);
+      getUserInfo();
+    } else {
+      console.log('Try again!');
     }
   }
 

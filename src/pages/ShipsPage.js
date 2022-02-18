@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from '../components/Button.js';
 
-export default function ShipsPage({ token }) {
+export default function ShipsPage({ token, buyShip }) {
   const [availableShips, setAvailableShips] = useState([]);
 
   return (
@@ -27,6 +27,7 @@ export default function ShipsPage({ token }) {
               <dt>Price:</dt>
               <dd>{ship.purchaseLocations[0].price}</dd>
             </dl>
+            <Button handleClick={buyShip}>Buy Ship</Button>
             <br />
           </>
         ))}
