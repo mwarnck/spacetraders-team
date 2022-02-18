@@ -1,4 +1,4 @@
-export default function Dashboard({ user }) {
+export default function Dashboard({ user, currentLoans }) {
   return (
     <section>
       <h2>{user.username}</h2>
@@ -7,10 +7,10 @@ export default function Dashboard({ user }) {
         <li>
           Current loans:
           <ul>
-            <li>Type: </li>
-            <li>Due date: </li>
-            <li>Repayment amount: </li>
-            <li>Status: </li>
+            <li>Type: {currentLoans.type} </li>
+            <li>Due date: {currentLoans.due}</li>
+            <li>Repayment amount: {currentLoans.repaymentAmount}$</li>
+            <li>Status: {currentLoans.status} </li>
           </ul>
         </li>
         <li>
