@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../components/Button.js';
 import Dashboard from '../components/Dashboard.js';
 
@@ -9,9 +9,17 @@ export default function UserStatusPage({
   token,
   getUserInfo,
   currentShip,
+  saveToLocal,
+  loadFromLocal,
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
-  const [currentLoans, setCurrentLoans] = useState({});
+  const [currentLoans, setCurrentLoans] = useState(
+    loadFromLocal('currentLoans') ?? {}
+  );
+
+  useEffect(() => {
+    saveToLocal('currentLoans', currentLoans);
+  }, [currentLoans]);
 
   return (
     <main>
