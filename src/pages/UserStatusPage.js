@@ -7,9 +7,11 @@ export default function UserStatusPage({
   user,
   isUsernameTaken,
   token,
+  saveToLocal,
+  loadFromLocal,
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
-  const [currentLoans, setCurrentLoans] = useState({});
+  const [currentLoans, setCurrentLoans] = useState([]);
 
   return (
     <main>
@@ -69,10 +71,7 @@ export default function UserStatusPage({
 
   async function takeLoan() {
     const response = await fetch(
-      `https://api.spacetraders.io/my/loans?token=` +
-        token +
-        '?' +
-        'type=STARTUP',
+      `https://api.spacetraders.io/my/loans?token=${token}&type=STARTUP`,
       {
         method: 'POST',
       }
@@ -83,7 +82,7 @@ export default function UserStatusPage({
     if (response.ok) {
       const data = await response.json();
       setCurrentLoans(data.loan);
-      console.log(data);
+      console.log(data.loan);
     } else {
       console.log('Try again!');
     }

@@ -12,7 +12,6 @@ function App() {
 
   useEffect(() => {
     saveToLocal('token', token);
-
     if (token && !user) {
       getUserInfo(token);
     }
@@ -30,6 +29,8 @@ function App() {
               user={user}
               isUsernameTaken={isUsernameTaken}
               token={token}
+              saveToLocal={saveToLocal}
+              loadFromLocal={loadFromLocal}
             />
           }
         />
