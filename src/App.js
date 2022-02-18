@@ -9,7 +9,9 @@ function App() {
   const [token, setToken] = useState(loadFromLocal('token'));
   const [user, setUser] = useState(null);
   const [isUsernameTaken, setIsUsernameTaken] = useState(false);
-  const [currentShip, setCurrentShip] = useState({});
+  const [currentShip, setCurrentShip] = useState(
+    loadFromLocal('currentShip') ?? {}
+  );
 
   useEffect(() => {
     saveToLocal('token', token);
@@ -17,6 +19,10 @@ function App() {
       getUserInfo(token);
     }
   }, [user, token]);
+
+  useEffect(() => {
+    saveToLocal('currentShip', currentShip);
+  }, [currentShip]);
 
   return (
     <div>
@@ -32,6 +38,8 @@ function App() {
               token={token}
               getUserInfo={getUserInfo}
               currentShip={currentShip}
+              saveToLocal={saveToLocal}
+              loadFromLocal={loadFromLocal}
             />
           }
         />
