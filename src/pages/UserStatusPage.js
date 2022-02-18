@@ -9,6 +9,8 @@ export default function UserStatusPage({
   token,
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
+  const [currentLoans, setCurrentLoans] = useState({});
+
   return (
     <main>
       <h1>Dashboard</h1>
@@ -18,12 +20,15 @@ export default function UserStatusPage({
           <Button handleClick={getAvailableLoans}>Show available Loans</Button>
           {availableLoans &&
             availableLoans.map(loan => (
-              <dl>
-                <dt>Amount:</dt>
-                <dd>{loan.amount}</dd>
-                <dt>Type:</dt>
-                <dd>{loan.type}</dd>
-              </dl>
+              <>
+                <dl>
+                  <dt>Amount:</dt>
+                  <dd>{loan.amount}</dd>
+                  <dt>Type:</dt>
+                  <dd>{loan.type}</dd>
+                </dl>
+                <Button handleClick={takeLoan}>Take Loan</Button>
+              </>
             ))}
         </>
       ) : (
@@ -60,5 +65,27 @@ export default function UserStatusPage({
     const form = event.target;
     const input = form.elements.username;
     onLogin(input.value);
+  }
+
+  async function takeLoan() {
+    const response = await fetch(
+      `https://api.spacetraders.io/my/loans?token=` +
+        token +
+        '?' +
+        'type=STARTUP',
+      {
+        method: 'POST',
+      }
+    ).catch(error => {
+      console.log('ERROR', error.message);
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setCurrentLoans(data.loan);
+      console.log(data);
+    } else {
+      console.log('Try again!');
+    }
   }
 }
