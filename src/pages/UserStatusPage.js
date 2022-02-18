@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '../components/Button.js';
+import Dashboard from '../components/Dashboard.js';
 
 export default function UserStatusPage({
   onLogin,
@@ -10,15 +11,10 @@ export default function UserStatusPage({
   const [availableLoans, setAvailableLoans] = useState([]);
   return (
     <main>
-      <h1>User status</h1>
+      <h1>Dashboard</h1>
       {user ? (
         <>
-          <dl>
-            <dt>Username:</dt>
-            <dd>{user.username}</dd>
-            <dt>Credits:</dt>
-            <dd>{user.credits}</dd>
-          </dl>
+          <Dashboard user={user} />
           <Button handleClick={getAvailableLoans}>Show available Loans</Button>
           {availableLoans &&
             availableLoans.map(loan => (
