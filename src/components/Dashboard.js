@@ -33,14 +33,3 @@ export default function Dashboard({ user }) {
     </section>
   );
 }
-
-/* <dl>
-  <dt>Username:</dt>
-  <dd>{user.username}</dd>
-  <dt>Credits:</dt>
-  <dd>{user.credits}</dd>
-  <dt>Current loans:</dt>
-  <dd>{user.credits}</dd>
-  <dt>Available ships:</dt>
-  <dd>{user.credits}</dd>
-</dl>; */
