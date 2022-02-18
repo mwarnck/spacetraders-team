@@ -33,7 +33,7 @@ function App() {
             />
           }
         />
-        <Route path="/ships" element={<ShipsPage />} />
+        <Route path="/ships" element={<ShipsPage token={token} />} />
         <Route path="/market" element={<MarketPage />} />
       </Routes>
     </div>
