@@ -10,7 +10,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [isUsernameTaken, setIsUsernameTaken] = useState(false);
   const [currentShip, setCurrentShip] = useState({});
-  console.log(currentShip);
 
   useEffect(() => {
     saveToLocal('token', token);
@@ -32,6 +31,7 @@ function App() {
               isUsernameTaken={isUsernameTaken}
               token={token}
               getUserInfo={getUserInfo}
+              currentShip={currentShip}
             />
           }
         />
@@ -112,5 +112,3 @@ function App() {
 }
 
 export default App;
-
-// https://api.spacetraders.io/my/ships?token=5c6efebf-1461-47ec-9fd0-21bb418bc089&location=OE-PM-TR&type=JW-MK-I

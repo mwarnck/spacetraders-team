@@ -8,6 +8,7 @@ export default function UserStatusPage({
   isUsernameTaken,
   token,
   getUserInfo,
+  currentShip,
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
   const [currentLoans, setCurrentLoans] = useState({});
@@ -17,7 +18,11 @@ export default function UserStatusPage({
       <h1>Dashboard</h1>
       {user ? (
         <>
-          <Dashboard user={user} currentLoans={currentLoans} />
+          <Dashboard
+            user={user}
+            currentLoans={currentLoans}
+            currentShip={currentShip}
+          />
           <Button handleClick={getAvailableLoans}>Show available Loans</Button>
           {availableLoans &&
             availableLoans.map(loan => (

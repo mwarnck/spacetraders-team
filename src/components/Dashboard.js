@@ -1,4 +1,4 @@
-export default function Dashboard({ user, currentLoans }) {
+export default function Dashboard({ user, currentLoans, currentShip }) {
   return (
     <section>
       <h2>{user.username}</h2>
@@ -17,14 +17,14 @@ export default function Dashboard({ user, currentLoans }) {
           Owned ships
           <ul>
             <li>
-              Ship 1
+              Ship: {currentShip.type}
               <ul>
-                <li>Type: </li>
-                <li>Manufacturer: </li>
-                <li>Current cargo: </li>
-                <li>Max cargo: </li>
-                <li>Available space: </li>
-                <li>Location: </li>
+                <li>Manufacturer: {currentShip.manufacturer}</li>
+                <li>Current cargo: {currentShip.cargo}</li>
+                <li>Max cargo: {currentShip.maxCargo}</li>
+                <li>Available space: {currentShip.spaceAvailable}</li>
+                <li>Location: {currentShip.location}</li>
+                <li>Weapons: {currentShip.weapons}</li>
               </ul>
             </li>
           </ul>
