@@ -3,10 +3,13 @@ import { createGlobalStyle } from 'styled-components';
 export default createGlobalStyle`
  * {
     box-sizing: border-box;
+    background-color: #333;
+    color: #ddd;
+    font-family: 'Orbitron', sans-serif;
  }
 
  body {
-    font-family: sans-serif;
+   font-size: 0.9rem;
  }
 
  .sr-only{

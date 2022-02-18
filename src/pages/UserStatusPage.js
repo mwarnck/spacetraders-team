@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from '../components/Button.js';
 import Dashboard from '../components/Dashboard.js';
+import styled from 'styled-components';
 
 export default function UserStatusPage({
   onLogin,
@@ -22,7 +23,7 @@ export default function UserStatusPage({
   }, [currentLoans]);
 
   return (
-    <main>
+    <PageContainer>
       <h1>Dashboard</h1>
       {user ? (
         <>
@@ -35,18 +36,17 @@ export default function UserStatusPage({
           {availableLoans &&
             availableLoans.map(loan => (
               <>
-                <dl>
-                  <dt>Amount:</dt>
-                  <dd>{loan.amount}</dd>
-                  <dt>Type:</dt>
-                  <dd>{loan.type}</dd>
-                </dl>
+                <LoanContainer>
+                  <p>Amount: {loan.amount} $</p>
+
+                  <p>Type: {loan.type}</p>
+                </LoanContainer>
                 <Button handleClick={takeLoan}>Take Loan</Button>
               </>
             ))}
         </>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <FormContainer onSubmit={handleSubmit}>
           <label htmlFor="username">Please select a user name</label>
           <input
             required
@@ -56,10 +56,10 @@ export default function UserStatusPage({
             placeholder="e.g. neuefische"
           />
           {isUsernameTaken && <p>Username already taken!</p>}
-          <button>Login</button>
-        </form>
+          <Button>Login</Button>
+        </FormContainer>
       )}
-    </main>
+    </PageContainer>
   );
 
   async function getAvailableLoans() {
@@ -100,3 +100,42 @@ export default function UserStatusPage({
     }
   }
 }
+
+const PageContainer = styled.main`
+  display: grid;
+  gap: 10px;
+
+  h1 {
+    text-align: center;
+    color: lawngreen;
+  }
+`;
+
+const LoanContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-evenly;
+
+  p {
+    border: 1px dotted orange;
+    border-radius: 5px;
+    padding: 15px;
+  }
+`;
+
+const FormContainer = styled.form`
+  display: grid;
+  gap: 10px;
+  align-content: center;
+
+  input {
+    color: cyan;
+    opacity: 0.7;
+    border-color: orange;
+  }
+
+  label {
+    color: goldenrod;
+  }
+`;
