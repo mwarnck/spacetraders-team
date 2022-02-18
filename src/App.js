@@ -29,8 +29,7 @@ function App() {
               user={user}
               isUsernameTaken={isUsernameTaken}
               token={token}
-              saveToLocal={saveToLocal}
-              loadFromLocal={loadFromLocal}
+              getUserInfo={getUserInfo}
             />
           }
         />

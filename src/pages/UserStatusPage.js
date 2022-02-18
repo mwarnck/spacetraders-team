@@ -7,18 +7,18 @@ export default function UserStatusPage({
   user,
   isUsernameTaken,
   token,
-  saveToLocal,
-  loadFromLocal,
+  getUserInfo,
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
-  const [currentLoans, setCurrentLoans] = useState([]);
-
+  const [currentLoans, setCurrentLoans] = useState({});
+  console.log(currentLoans);
+  console.log(user);
   return (
     <main>
       <h1>Dashboard</h1>
       {user ? (
         <>
-          <Dashboard user={user} />
+          <Dashboard user={user} currentLoans={currentLoans} />
           <Button handleClick={getAvailableLoans}>Show available Loans</Button>
           {availableLoans &&
             availableLoans.map(loan => (
@@ -82,6 +82,7 @@ export default function UserStatusPage({
     if (response.ok) {
       const data = await response.json();
       setCurrentLoans(data.loan);
+      getUserInfo(token);
       console.log(data.loan);
     } else {
       console.log('Try again!');
