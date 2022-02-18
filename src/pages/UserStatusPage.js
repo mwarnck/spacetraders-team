@@ -11,8 +11,7 @@ export default function UserStatusPage({
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
   const [currentLoans, setCurrentLoans] = useState({});
-  console.log(currentLoans);
-  console.log(user);
+
   return (
     <main>
       <h1>Dashboard</h1>
@@ -83,7 +82,6 @@ export default function UserStatusPage({
       const data = await response.json();
       setCurrentLoans(data.loan);
       getUserInfo(token);
-      console.log(data.loan);
     } else {
       console.log('Try again!');
     }
