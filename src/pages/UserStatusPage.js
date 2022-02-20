@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Button from '../components/Button.js';
 import Dashboard from '../components/Dashboard.js';
 import styled from 'styled-components';
+import useLocalStorage from '../hooks/useLocalStorage.js';
 
 export default function UserStatusPage({
   onLogin,
@@ -14,13 +15,7 @@ export default function UserStatusPage({
   loadFromLocal,
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
-  const [currentLoans, setCurrentLoans] = useState(
-    loadFromLocal('currentLoans') ?? {}
-  );
-
-  useEffect(() => {
-    saveToLocal('currentLoans', currentLoans);
-  }, [currentLoans]);
+  const [currentLoans, setCurrentLoans] = useLocalStorage('currentLoans', {});
 
   return (
     <PageContainer>
