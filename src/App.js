@@ -33,8 +33,6 @@ function App() {
               token={token}
               getUserInfo={getUserInfo}
               currentShip={currentShip}
-              saveToLocal={saveToLocal}
-              loadFromLocal={loadFromLocal}
             />
           }
         />
@@ -42,7 +40,7 @@ function App() {
           path="/ships"
           element={<ShipsPage token={token} buyShip={buyShip} />}
         />
-        <Route path="/market" element={<MarketPage />} />
+        <Route path="/market" element={<MarketPage token={token} />} />
       </Routes>
     </div>
   );

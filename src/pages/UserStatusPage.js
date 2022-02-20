@@ -11,8 +11,6 @@ export default function UserStatusPage({
   token,
   getUserInfo,
   currentShip,
-  saveToLocal,
-  loadFromLocal,
 }) {
   const [availableLoans, setAvailableLoans] = useState([]);
   const [currentLoans, setCurrentLoans] = useLocalStorage('currentLoans', {});
