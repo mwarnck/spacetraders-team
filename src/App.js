@@ -4,14 +4,13 @@ import ShipsPage from './pages/ShipsPage.js';
 import UserStatusPage from './pages/UserStatusPage.js';
 import MarketPage from './pages/MarketPage.js';
 import { useEffect, useState } from 'react';
+import useLocalStorage from './hooks/useLocalStorage.js';
 
 function App() {
   const [token, setToken] = useState(loadFromLocal('token'));
   const [user, setUser] = useState(null);
   const [isUsernameTaken, setIsUsernameTaken] = useState(false);
-  const [currentShip, setCurrentShip] = useState(
-    loadFromLocal('currentShip') ?? {}
-  );
+  const [currentShip, setCurrentShip] = useLocalStorage('currentShip', {});
 
   useEffect(() => {
     saveToLocal('token', token);
@@ -19,10 +18,6 @@ function App() {
       getUserInfo(token);
     }
   }, [user, token]);
-
-  useEffect(() => {
-    saveToLocal('currentShip', currentShip);
-  }, [currentShip]);
 
   return (
     <div>
